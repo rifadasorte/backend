@@ -40,6 +40,16 @@ class Numeros(models.Model):
     def __str__(self):
         return self.codigo
 
+class status_requisicao(models.Choices):
+    aberto = 'ABERTO'
+    fechado = 'FECHADO'
+    cancelado = 'CANCELADO'
+
+class Requisiçao(models.Model):
+    user = models.ForeignKey(User, on_delete=DO_NOTHING)
+    numeros = models.ManyToManyField(Numeros,related_name='red_num')
+    status = models.CharField(max_length=50, choices=status_requisicao.choices, default=status_requisicao.aberto)
+    codigo_de_trasacao = models.CharField(max_length=255)
 
 def generate_numbers(numbers):
     array_number = []
@@ -60,4 +70,17 @@ def post_save_draw(sender, **kwargs):
             ) 
             number.save()
 
+def post_save_requisicao(sender, **kwargs):
+    instance = kwargs['instance']
+    if(instance.status == status_requisicao.aberto):
+        for num in instance.numeros:
+            num.status = status.reservado
+    elif(instance.status == status_requisicao.fechado):
+        for num in instance.numeros:
+            num.status = status.vendido
+    elif(instance.status == status_requisicao.cancelado):
+        for num in instance.numeros:
+            num.status = status.livre
+
 post_save.connect(post_save_draw, sender=Sorteio)
+post_save.connect(post_save_requisicao, sender=Requisiçao)
