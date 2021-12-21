@@ -2,7 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+*.jpg
+*.jpeg
+*.png
+*.sqlite3
+migrations/
+*/migrations/
 # C extensions
 *.so
 
