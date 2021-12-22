@@ -10,7 +10,7 @@ from .serializers import NumbersSerializer, DrawsSerializer
 
 class GetNumbers(APIView):
     def get(self, request, pk):
-        numbers = Numeros.objects.filter(sorteio__id = pk)
+        numbers = Numeros.objects.filter(sorteio__id = pk).order_by('-codigo')
         serializer = NumbersSerializer(numbers, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
