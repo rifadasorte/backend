@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.deletion import DO_NOTHING
+from django.db.models.deletion import DO_NOTHING, SET_NULL
 from django.db.models.signals import post_save
 from threading import Timer
 
@@ -61,6 +61,7 @@ class Numeros(models.Model):
                         blank=True)
     status = models.CharField(max_length=50, choices=status.choices, default=status.livre)
     sorteio = models.ForeignKey(Sorteio, on_delete=models.CASCADE, related_name='numbers_draw')
+
     def __str__(self):
         return self.codigo
 
