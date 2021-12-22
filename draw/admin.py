@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Numeros, Premio, Sorteio
+from .models import (Numeros, Premio, Requisicao, Sorteio, Telefone)
 
-class NumberInline(admin.TabularInline):
+class NumberInline(admin.StackedInline):
     model = Numeros
 
 class DrawAdmin(admin.ModelAdmin):
@@ -13,7 +13,23 @@ class DrawAdmin(admin.ModelAdmin):
                     'vencedor')
     inlines = [
                 NumberInline,
-              ]
+    ]
+
+class RequestAdmin(admin.ModelAdmin):
+    list_display = ('user', 
+                    'status',
+                    'criado_em',
+                    'data_pagamento',
+                    'codigo_de_transacao')
+    inlines = [
+        NumberInline,
+    ]
+
+class TelefoneAdmin(admin.ModelAdmin):
+    list_display = ('user', 'numero',)
+    search_fields = ('user',)
 
 admin.site.register(Sorteio, DrawAdmin)
 admin.site.register(Premio)
+admin.site.register(Telefone, TelefoneAdmin)
+admin.site.register(Requisicao, RequestAdmin)
