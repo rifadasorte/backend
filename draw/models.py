@@ -55,7 +55,7 @@ class Numeros(models.Model):
                         blank=True)
     requisicao = models.ForeignKey(
                         Requisicao, 
-                        on_delete=SET_NULL, 
+                        on_delete=models.SET_NULL, 
                         related_name='req_num', 
                         null=True, 
                         blank=True)
