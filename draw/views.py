@@ -46,6 +46,7 @@ def check_if_free(numeros):
     return True
 
 class SetRequest(APIView):
+    @permission_classes([IsAuthenticated,])
     def post(self, request):
         user = request.user
         data = request.data
