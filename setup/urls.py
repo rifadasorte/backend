@@ -5,7 +5,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from django.conf.urls.static import static
+from django.conf.urls import url
+from django.conf.urls.static import serve
 from django.conf import settings
 
 urlpatterns = [
@@ -13,4 +14,5 @@ urlpatterns = [
     path('draw/', include(urls_draw)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^media/(.*)$', serve, {'document_root':settings.STATIC_ROOT}),
+]
