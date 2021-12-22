@@ -23,7 +23,7 @@ class Sorteio(models.Model):
     preco_da_rifa = models.FloatField()
     criado_em = models.DateField(auto_now_add=True)
     data_do_sorteio = models.DateField()
-    vencedor = models.ForeignKey(User, null=True, blank=True, on_delete=DO_NOTHING)
+    vencedor = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=50, choices=status_sorteio.choices, default=status_sorteio.aberto)
 
     def __str__(self):
@@ -35,7 +35,7 @@ class status_requisicao(models.Choices):
     cancelado = 'CANCELADO'
 
 class Requisicao(models.Model):
-    user = models.ForeignKey(User, on_delete=DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=status_requisicao.choices, default=status_requisicao.aberto)
     criado_em = models.DateField(auto_now_add=True)
     data_pagamento = models.DateField(null=True, blank=True)
@@ -50,12 +50,12 @@ class Numeros(models.Model):
     codigo = models.CharField(max_length=4)
     proprietario = models.ForeignKey(
                         User, 
-                        on_delete=models.PROTECT, 
+                        on_delete=models.SET_NULL, 
                         null=True,
                         blank=True)
     requisicao = models.ForeignKey(
                         Requisicao, 
-                        on_delete=DO_NOTHING, 
+                        on_delete=models.SET_NULL, 
                         related_name='req_num', 
                         null=True, 
                         blank=True)
