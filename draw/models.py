@@ -35,7 +35,7 @@ class status_requisicao(models.Choices):
     cancelado = 'CANCELADO'
 
 class Requisicao(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=status_requisicao.choices, default=status_requisicao.aberto)
     criado_em = models.DateField(auto_now_add=True)
     data_pagamento = models.DateField(null=True, blank=True)
@@ -61,7 +61,7 @@ class Numeros(models.Model):
                         blank=True)
     status = models.CharField(max_length=50, choices=status.choices, default=status.livre)
     sorteio = models.ForeignKey(Sorteio, on_delete=models.CASCADE, related_name='numbers_draw')
-    
+
     def __str__(self):
         return self.codigo
 
