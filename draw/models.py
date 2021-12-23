@@ -7,7 +7,7 @@ from threading import Timer
 # Create your models here.
 
 class Premio(models.Model):
-    imagem = models.ImageField(upload_to='images')
+    imagem = models.ImageField(upload_to='images/')
     nome = models.CharField(max_length=50)
     valor = models.FloatField()
     def __str__(self):
