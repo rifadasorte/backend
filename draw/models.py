@@ -95,15 +95,6 @@ def check_if_paid(request):
         request.status = status_requisicao.cancelado
         request.save()
 
-def get_reserved_time(request):
-    try:
-        number = Numeros.objects.filter(requisicao = request)
-        sorteio = Sorteio.objects.get(id=number.sorteio.id)
-        time = sorteio.tempo_de_reserva
-        return time
-    except:
-        return 0
-
 def post_save_request(sender, **kwargs):
     instance = kwargs['instance']
     created = kwargs['created']
