@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+    'storages',
 ]
 
 REST_FRAMEWORK = {
@@ -175,14 +176,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = 'AKIAXTHDV7G3KSBNVQCN'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIAXTHDV7G3BGJRUJRB'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'rifadasorte'
+AWS_URL='https://rifadasorte.s3.amazonaws.com/'
 AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = None
+AWS_S3_REGION_NAME = 'sa-east-1'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+STATIC_URL = AWS_URL + '/static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = AWS_URL + '/media/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_URL = 'static/'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'
 # STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'),)
@@ -193,4 +202,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10500
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
