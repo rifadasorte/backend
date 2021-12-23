@@ -182,8 +182,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_OAUTH2_TOKEN = 'sl.A-sNEZ660_otRA2py1HdeG7_7c6GlbL1X1TQkPyqIhpK82smCItFGo1XGtLqMAMP0AUAx-X5m9FrTDalKB1WUB-2vMVy_UkN86L5FGWTSuHpjwphafoapKXa7hSLff5_5FHeeqI'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
