@@ -8,7 +8,6 @@ class DrawAdmin(admin.ModelAdmin):
     list_display = ('premio', 
                     'quantidade_de_numeros', 
                     'preco_da_rifa',
-                    'tempo_de_reserva',
                     'criado_em',
                     'data_do_sorteio',
                     'vencedor')
