@@ -18,7 +18,7 @@ class status_sorteio(models.Choices):
     fechado = 'FECHADO'
 
 class Configuracao(models.Model):
-    tempo_de_reserva = models.IntegerField(default=240)
+    tempo_de_reserva = models.IntegerField()
 
 class Sorteio(models.Model):
     premio = models.OneToOneField(Premio, related_name='prize_draw', on_delete=models.CASCADE)
