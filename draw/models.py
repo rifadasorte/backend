@@ -21,6 +21,7 @@ class Sorteio(models.Model):
     premio = models.OneToOneField(Premio, related_name='prize_draw', on_delete=models.CASCADE)
     quantidade_de_numeros = models.IntegerField()
     preco_da_rifa = models.FloatField()
+    tempo_de_reserva = IntegerField(default=240)
     criado_em = models.DateField(auto_now_add=True)
     data_do_sorteio = models.DateField()
     vencedor = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
