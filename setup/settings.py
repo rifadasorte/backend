@@ -177,11 +177,9 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'content')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = (
-    os.path.join(STATIC_ROOT, 'static'),
-    os.path.join(MEDIA_ROOT, 'images')
+    os.path.join(STATIC_ROOT, 'images'),
 )
 
 # Default primary key field type
