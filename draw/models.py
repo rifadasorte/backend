@@ -99,7 +99,6 @@ def post_save_request(sender, **kwargs):
     if(created):
         interval = 60
         timer = Timer(interval, check_if_paid, args=(instance,))
-        print('gerou timer', timer)
         timer.start()
     elif(instance.status == status_requisicao.fechado):
         for num in Numeros.objects.filter(requisicao=instance):
