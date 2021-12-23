@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Configuracao, Numeros, Premio, Requisicao, Sorteio, Telefone)
+from .models import (Numeros, Premio, Requisicao, Sorteio, Telefone)
 
 class NumberInline(admin.StackedInline):
     model = Numeros
@@ -33,4 +33,3 @@ admin.site.register(Sorteio, DrawAdmin)
 admin.site.register(Premio)
 admin.site.register(Telefone, TelefoneAdmin)
 admin.site.register(Requisicao, RequestAdmin)
-admin.site.register(Configuracao)
