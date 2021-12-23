@@ -175,11 +175,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = 'AKIAXTHDV7G3BGJRUJRB'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIAXTHDV7G3L23YZHUE'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'rifadasorte'
-AWS_URL='https://rifadasorte.s3.amazonaws.com/'
+AWS_URL='https://rifadasorte.s3.sa-east-1.amazonaws.com'
 AWS_QUERYSTRING_AUTH = False
 AWS_DEFAULT_ACL = None
 AWS_S3_REGION_NAME = 'sa-east-1'
