@@ -21,7 +21,6 @@ class Sorteio(models.Model):
     premio = models.OneToOneField(Premio, related_name='prize_draw', on_delete=models.CASCADE)
     quantidade_de_numeros = models.IntegerField()
     preco_da_rifa = models.FloatField()
-    tempo_de_reserva = models.IntegerField(default=240)
     criado_em = models.DateField(auto_now_add=True)
     data_do_sorteio = models.DateField()
     vencedor = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
@@ -70,42 +69,35 @@ class Telefone(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     numero = models.CharField(max_length=15)
 
-def generate_numbers(instance):
-    numbers = instance.quantidade_de_numeros
+def generate_numbers(numbers):
+    array_number = []
     digits = len(str(numbers-1))
     for num in range(numbers):
-        code = ((digits - len(str(num)))*'0') + str(num)
-        number = Numeros.objects.create(
-                codigo = code,
-                sorteio = instance) 
-        number.save()
+        array_number.append(((digits - len(str(num)))*'0') + str(num))
+    return array_number
 
 def post_save_draw(sender, **kwargs):
     instance = kwargs['instance']
     created = kwargs['created']
     if(created):
-        generate_numbers(instance)
-            
+        nums = generate_numbers(instance.quantidade_de_numeros)
+        for code in nums:
+            number = Numeros.objects.create(
+                codigo = code,
+                sorteio = instance
+            ) 
+            number.save()
 
 def check_if_paid(request):
     if(request.status == status_requisicao.aberto):
         request.status = status_requisicao.cancelado
         request.save()
 
-def get_reserved_time(request):
-    try:
-        number = Numeros.objects.filter(requisicao = request)
-        sorteio = Sorteio.objects.get(id=number.sorteio.id)
-        time = sorteio.tempo_de_reserva
-        return time
-    except:
-        return 0
-
 def post_save_request(sender, **kwargs):
     instance = kwargs['instance']
     created = kwargs['created']
     if(created):
-        interval = 60 * get_reserved_time(instance)
+        interval = 60
         timer = Timer(interval, check_if_paid, args=(instance,))
         print('gerou timer', timer)
         timer.start()
