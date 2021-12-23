@@ -70,22 +70,24 @@ class Telefone(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     numero = models.CharField(max_length=15)
 
-def generate_numbers(instance):
-    numbers = instance.quantidade_de_numeros
+def generate_numbers(numbers):
+    array_number = []
     digits = len(str(numbers-1))
     for num in range(numbers):
-        code = ((digits - len(str(num)))*'0') + str(num)
-        number = Numeros.objects.create(
-                codigo = code,
-                sorteio = instance) 
-        number.save()
+        array_number.append(((digits - len(str(num)))*'0') + str(num))
+    return array_number
 
 def post_save_draw(sender, **kwargs):
     instance = kwargs['instance']
     created = kwargs['created']
     if(created):
-        generate_numbers(instance)
-            
+        nums = generate_numbers(instance.quantidade_de_numeros)
+        for code in nums:
+            number = Numeros.objects.create(
+                codigo = code,
+                sorteio = instance
+            ) 
+            number.save()
 
 def check_if_paid(request):
     if(request.status == status_requisicao.aberto):
@@ -105,9 +107,8 @@ def post_save_request(sender, **kwargs):
     instance = kwargs['instance']
     created = kwargs['created']
     if(created):
-        interval = 60 * get_reserved_time(instance)
+        interval = 60
         timer = Timer(interval, check_if_paid, args=(instance,))
-        print('gerou timer', timer)
         timer.start()
     elif(instance.status == status_requisicao.fechado):
         for num in Numeros.objects.filter(requisicao=instance):
