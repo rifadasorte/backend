@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Numeros, Premio, Requisicao, Sorteio, Telefone)
+from .models import (Configuracao, Numeros, Premio, Requisicao, Sorteio, Telefone)
 
 class NumberInline(admin.StackedInline):
     model = Numeros
@@ -8,7 +8,6 @@ class DrawAdmin(admin.ModelAdmin):
     list_display = ('premio', 
                     'quantidade_de_numeros', 
                     'preco_da_rifa',
-                    'tempo_de_reserva',
                     'criado_em',
                     'data_do_sorteio',
                     'vencedor')
@@ -34,3 +33,4 @@ admin.site.register(Sorteio, DrawAdmin)
 admin.site.register(Premio)
 admin.site.register(Telefone, TelefoneAdmin)
 admin.site.register(Requisicao, RequestAdmin)
+admin.site.register(Configuracao)
