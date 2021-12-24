@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     'storages',
+    'django_admin_inline_paginator',
 ]
 
 REST_FRAMEWORK = {
