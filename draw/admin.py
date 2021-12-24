@@ -17,7 +17,7 @@ class InlineChangeList(object):
 
 
 class PaginationInline(admin.TabularInline):
-    template = 'admin/edit_inline/tabular_paginated.html'
+    template = 'tabular_paginated.html'
     per_page = 20
 
     def get_formset(self, request, obj=None, **kwargs):
