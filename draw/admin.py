@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (Numeros, Premio, Requisicao, Sorteio, Telefone)
 
-class NumberInline(admin.StackedInline):
+class NumberInline(admin.TabularInline):
     model = Numeros
 
 class DrawAdmin(admin.ModelAdmin):
