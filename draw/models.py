@@ -84,7 +84,8 @@ def post_save_draw(sender, **kwargs):
     instance = kwargs['instance']
     created = kwargs['created']
     if(created):
-        Timer(1, generate_numbers, args=(instance,))
+        timer = Timer(0, generate_numbers, args=(instance,))
+        timer.start()
             
 
 def check_if_paid(request):
