@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ahi@gq8tgye5s5g&++#-$@ksqxk6oz&$10%*mrvq0!7fzt8hz4'
+SECRET_KEY = ${{ env.SECRET_KEY }}
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -176,8 +176,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-AWS_ACCESS_KEY_ID = 'AKIAXTHDV7G3L23YZHUE'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = ${{ env.AWS_ACCESS_KEY_ID }}
+AWS_SECRET_ACCESS_KEY = ${{ env.AWS_SECRET_ACCESS_KEY }}
 AWS_STORAGE_BUCKET_NAME = 'rifadasorte'
 AWS_URL='https://rifadasorte.s3.sa-east-1.amazonaws.com'
 AWS_QUERYSTRING_AUTH = False
